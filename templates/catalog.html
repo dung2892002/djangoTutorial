@@ -5,7 +5,7 @@
   <div id="banner">
     <div class="bannerIEPadder">
       <div class="cart_box">
-        <a href = "http://127.0.0.1:8000/cart/">Cart</a>
+        <a href = "http://localhost:8000/cart/">Cart</a>
       </div>
       Modern Musician
     </div>
@@ -16,13 +16,17 @@
   <div id="middle">
     <div id="sidebar">
       <div class="sidebarIEPadder">
-        [search box here]
+        <form action="/search/" method="GET">
+          <input type="text" name="q" placeholder="Search products..." />
+          <button type="submit">Search</button>
+        </form>
+      
         <br />
         {% include "tags/category_list.html" %}
        
       </div>
     </div>
-    <div id="content" style="height: 480px">
+    <div id="content" >
       <a name="content"></a>
       <div class="contentIEPadder">{% block content %}{% endblock %}</div>
     </div>

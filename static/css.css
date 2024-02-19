@@ -7,7 +7,9 @@ html {
 }
 html,
 body {
-  background-color: Silver;
+  width: 100%;
+  height: 100%;
+
 }
 .cb {
   clear: both;
@@ -23,7 +25,8 @@ body {
 }
 #main {
   margin: 0 auto;
-  width: 900px;
+  width: 100%;
+  height: 100%;
   background-color: White;
 }
 .bannerIEPadder,
@@ -36,8 +39,7 @@ body {
   padding: 5px;
 }
 #banner {
-  width: 900px;
-  height: 75px;
+  width: 100%;
   background-color: DarkOrange;
   color: White;
   font-size: 36px;
@@ -58,14 +60,16 @@ div.cart_box a {
   float: left;
 }
 #content {
-  width: 700px;
+  width: 100%;
   float: left;
 }
 #footer {
-  clear: both;
+  clear: both; /* Đảm bảo rằng footer hiển thị sau khi tất cả các sản phẩm kết thúc */
   background-color: #98ac5e;
+  font-size: 20px;
   color: White;
   text-align: center;
+  margin-top: 100px; /* Khoảng cách giữa sản phẩm cuối cùng và footer */
 }
 a.skip_link {
   position: absolute;
@@ -74,8 +78,7 @@ a.skip_link {
 }
 
 #navigation {
-  width: 900px;
-  height: auto;
+  width: 100%;
   background-color: #98ac5e;
   text-align: middle;
 }
@@ -106,12 +109,25 @@ a:hover {
   text-decoration: underline;
 }
 /* category page styles */
-div.product_thumbnail {
-  text-align: center;
-  float: left;
-  width: 20px;
-  height: 20px;
+
+div.product_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Canh giữa các sản phẩm */
+  margin-bottom: 20px; /* Khoảng cách dưới cùng của các hàng */
 }
+
+
+div.product_thumbnail {
+  flex: 0 0 calc(20% - 20px); /* Số lượng sản phẩm trên mỗi hàng và trừ đi khoảng trống */
+  text-align: center;
+  margin-bottom: 20px; /* Khoảng cách dưới cùng của sản phẩm */
+}
+
+div.product_wrapper div.product_thumbnail:nth-child(4n) {
+  margin-right: 0;
+}
+
 img.image_product {
   width: 20px;
   height: 20px;
@@ -175,4 +191,45 @@ div#footer a {
   text-decoration: underline;
   font-weight: normal;
   margin-right: 10px;
+}
+#middle {
+  display: flex;
+}
+
+#sidebar {
+  flex: 0 0 200px; /* Đảm bảo sidebar chiếm 200px chiều rộng */
+}
+
+#content {
+  flex: 1; /* Content chiếm phần còn lại của #middle */
+}
+
+#footer {
+  clear: both;
+  background-color: #98ac5e;
+  font-size: 20px;
+  color: White;
+  text-align: center;
+  margin-top: 20px; /* Thay đổi giá trị này để giảm khoảng cách với nội dung trang */
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.product_wrapper {
+  display: flex;
+  justify-content: space-between; /* Các phần tử con được căn cách xa nhau */
+}
+
+.product_description {
+  flex: 1; /* Phần mô tả sẽ mở rộng để chiếm hết phần còn lại của wrapper */
+  padding-right: 20px; /* Tạo khoảng cách giữa phần mô tả và các nội dung còn lại */
+}
+
+.product_details {
+  flex: 1; /* Phần chi tiết sản phẩm cũng sẽ mở rộng để chiếm hết phần còn lại của wrapper */
 }

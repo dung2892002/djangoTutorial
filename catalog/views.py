@@ -63,3 +63,8 @@ def show_product(request, product_slug, template_name="catalog/product.html"):
     }
 
     return render(request, template_name, context)
+
+def search(request):
+    query = request.GET.get('q')
+    products = Product.objects.filter(name__icontains=query)
+    return render(request, 'search_results.html', {'products': products})

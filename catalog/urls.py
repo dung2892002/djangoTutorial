@@ -1,8 +1,9 @@
 from django.urls import path
-from catalog.views import index, show_category, show_product
+from catalog.views import index, show_category, show_product,search
 
 urlpatterns = [
     path('', index, {'template_name': 'catalog/index.html'}, name='catalog_home'),
     path('category/<slug:category_slug>/', show_category, {'template_name': 'catalog/category.html'}, name='catalog_category'),
     path('product/<slug:product_slug>/', show_product, {'template_name': 'catalog/product.html'}, name='catalog_product'),
+    path('search/', search, name='search')
 ]
