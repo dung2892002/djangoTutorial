@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from catalog.models import Category, Product 
 from django.template import RequestContext
-from django.urls import resolve
+from django.urls import resolve, reverse
 from cart import cart
 from django.http import HttpResponseRedirect 
 from cart.forms import ProductAddToCartForm 
@@ -30,33 +30,29 @@ def show_category(request, category_slug, template_name="catalog/category.html")
     }
     return render(request, template_name, context)
 
+def show_product(request, product_slug, template_name="catalog/product.html"):
+    p = get_object_or_404(Product, slug=product_slug)
+    categories = p.categories.filter(is_active=True)
+    page_title = p.name
+    meta_keywords = p.meta_keywords
+    meta_description = p.meta_description
 
-
-def show_product(request, product_slug, template_name="catalog/product.html"): 
-    print(3)
-
-    p = get_object_or_404(Product, slug=product_slug) 
-    categories = p.categories.filter(is_active=True) 
-    page_title = p.name 
-    meta_keywords = p.meta_keywords 
-    meta_description = p.meta_description 
-    if request.method == 'POST': 
-
- # add to cart…create the bound form 
+    if request.method == 'POST':
         postdata = request.POST.copy() 
-        form = ProductAddToCartForm(request, postdata) 
- #check if posted data is valid 
+        form = ProductAddToCartForm(request, postdata)  # Bỏ đi request
         if form.is_valid():
-            cart.add_to_cart(request) 
-        if request.session.test_cookie_worked(): 
-            request.session.delete_test_cookie() 
-        url = resolve.reverse('show_cart') 
-        return HttpResponseRedirect(url) 
+            # Gọi hàm add_to_cart từ module cart
+            cart.add_to_cart(request)
+            print('them thanh cong')
+            if request.session.test_cookie_worked():
+                request.session.delete_test_cookie()
+            return HttpResponseRedirect(reverse('show_cart'))
     else:
-        form = ProductAddToCartForm(request=request, label_suffix=':')
-        form.fields['product_slug'].widget.attrs['value'] = product_slug 
-        request.session.set_test_cookie() 
-        
+        form = ProductAddToCartForm(label_suffix=':')
+    form.fields['product_slug'].widget.attrs['value'] = product_slug
+    print('hello')
+    request.session.set_test_cookie()
+
     context = {
         'p': p,
         'categories': categories,
