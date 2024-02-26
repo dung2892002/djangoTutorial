@@ -26,7 +26,7 @@ urlpatterns = [
     path('static/<path:path>', serve, {'document_root': settings.STATIC_ROOT}),
     path('cart/',  include('cart.urls')),
     path('',  include('catalog.urls')),
-
+    path('search/', include('search.urls'))
     # Add other URL patterns as needed
 ]
 

@@ -41,7 +41,7 @@ class Product(models.Model):
     sku = models.CharField(max_length=50) 
     price = models.DecimalField(max_digits=9,decimal_places=2) 
     old_price = models.DecimalField(max_digits=9,decimal_places=2, blank=True,default=0.00) 
-    image = models.CharField(max_length=50) 
+    image = models.CharField(max_length=255) 
     is_active = models.BooleanField(default=True) 
     is_bestseller = models.BooleanField(default=False) 
     is_featured = models.BooleanField(default=False) 

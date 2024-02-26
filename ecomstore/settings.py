@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+PRODUCTS_PER_PAGE = 12 
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'catalog',
     'utils',
     'cart',
+    'search',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +69,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'utils.context_processors.ecomstore'
             ],
+            'libraries': {
+                'search_tags': 'search.template_tags.search_tags',
+            },
         },
     },
 ]

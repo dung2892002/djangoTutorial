@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block site_wrapper %}
+{% load search_tags %} 
 <div id="main">
   <a href="#content" class="skip_link">Skip to main content</a>
   <div id="banner">
@@ -16,11 +17,11 @@
   <div id="middle">
     <div id="sidebar">
       <div class="sidebarIEPadder">
-        <form action="/search/" method="GET">
+        {% comment %} <form action="/search/" method="GET">
           <input type="text" name="q" placeholder="Search products..." />
           <button type="submit">Search</button>
-        </form>
-      
+        </form> {% endcomment %}
+        {% search_box request %} 
         <br />
         {% include "tags/category_list.html" %}
        
